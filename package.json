@@ -1,0 +1,31 @@
+{
+  "name": "markdown-it-dice-roller",
+  "version": "0.0.0",
+  "description": "A plugin for markdown-it to allow rolling of dice in Markdown documents.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dice-roller/markdown-it-dice-roller.git"
+  },
+  "keywords": [
+    "markdown-it-plugin",
+    "markdown-it",
+    "markdown",
+    "dice",
+    "roller",
+    "dice",
+    "roller"
+  ],
+  "author": "GreenImp Media <info@greenimp.co.uk> (https://greenimp.co.uk)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dice-roller/markdown-it-dice-roller/issues"
+  },
+  "homepage": "https://github.com/dice-roller/markdown-it-dice-roller#readme",
+  "peerDependencies": {
+    "markdown-it": "^13.0.1"
+  }
+}
