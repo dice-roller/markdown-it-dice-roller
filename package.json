@@ -1,5 +1,5 @@
 {
-  "name": "markdown-it-dice-roller",
+  "name": "@dice-roller/markdown-it-dice-roller",
   "version": "0.0.0",
   "description": "A plugin for markdown-it to allow rolling of dice in Markdown documents.",
   "main": "index.js",
