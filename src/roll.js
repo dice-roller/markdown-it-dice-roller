@@ -9,7 +9,7 @@ const roll = (notation) => new DiceRoll(notation.trim());
 const includePlugin = (md, options = {}) => {
   options = { ...defaultOptions, ...options };
 
-  const fenceRegex = new RegExp(`${FENCE}\\s*roll(\\s+.+(?!:::))(\\s*${FENCE})`);
+  const fenceRegex = new RegExp(`${FENCE}\\s*roll(\\s+.+(?!:::))?(\\s*${FENCE})`);
 
   const renderRoll = (notation) => {
     const output = roll(notation);
