@@ -12,7 +12,7 @@ const includePlugin = (md, options = {}) => {
   const fenceRegex = new RegExp(`${FENCE}\\s*roll(\\s+.+(?!:::))?(\\s*${FENCE})`);
 
   const renderRoll = (notation) => {
-    const output = roll(notation);
+    const output = notation ? roll(notation) : '';
 
     if (typeof options.renderRoll === 'function') {
       return options.renderRoll(output);
@@ -38,7 +38,7 @@ const includePlugin = (md, options = {}) => {
   const includeRoll = (state) => {
     let cap;
     while ((cap = fenceRegex.exec(state.src))) {
-      const [, notation] = cap;
+      const notation = (cap[1] || '').trim();
 
       state.src = state.src.slice(0, cap.index) +
         renderRoll(notation) +

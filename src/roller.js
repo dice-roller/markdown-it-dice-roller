@@ -10,10 +10,10 @@ const includePlugin = (md, options = {}) => {
   const includeRoller = (state) => {
     let cap;
     while ((cap = fenceRegex.exec(state.src))) {
-      const [, notation] = cap;
+      const notation = (cap[1] || '').trim();
 
       state.src = `${state.src.slice(0, cap.index)}
-<DiceRoller notation="${notation.trim()}" />
+<DiceRoller notation="${notation}" />
 ${state.src.slice(cap.index + cap[0].length, state.src.length)}`;
     }
   };
