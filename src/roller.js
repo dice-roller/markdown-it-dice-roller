@@ -5,7 +5,7 @@ const defaultOptions = {};
 const includePlugin = (md, options = {}) => {
   options = { ...defaultOptions, ...options };
 
-  const fenceRegex = new RegExp(`${FENCE}\\s*roller(\\s+.*?(?!:::))(\\s*${FENCE})`);
+  const fenceRegex = new RegExp(`${FENCE}\\s*roller(\\s+.*?(?!:::))?(\\s*${FENCE})`);
 
   const includeRoller = (state) => {
     let cap;
