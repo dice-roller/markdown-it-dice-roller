@@ -13,7 +13,7 @@ const roll = (notation) => {
 
   roll();
 
-  return output.value?.output ?? '';
+  return `${output.value ?? ''}`;
 };
 
 const includePlugin = (md, options = {}) => {
