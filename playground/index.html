@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Markdown Dice Roller Playground</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="playground">
+      <header>
+        <h1>Markdown Dice Roller Playground</h1>
+        <p>Edit the Markdown, then render it to see static rolls and interactive rollers.</p>
+      </header>
+
+      <label for="markdown-input">Markdown</label>
+      <textarea id="markdown-input" spellcheck="false">A static roll:
+
+::: roll 1d6 :::
+
+An interactive roller:
+
+::: roller 1d20 :::
+
+Both plugins can be used in the same document.</textarea>
+      <button id="render-button" type="button">Render preview</button>
+      <p id="error-message" role="alert" hidden></p>
+
+      <div class="outputs">
+        <section aria-labelledby="html-heading">
+          <h2 id="html-heading">Generated HTML</h2>
+          <pre><code id="generated-html"></code></pre>
+        </section>
+        <section aria-labelledby="preview-heading">
+          <h2 id="preview-heading">Visual preview</h2>
+          <div id="preview" class="preview"></div>
+        </section>
+      </div>
+    </main>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>

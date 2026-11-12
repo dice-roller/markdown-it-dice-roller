@@ -1,15 +1,25 @@
-import { DiceRoll } from '@dice-roller/rpg-dice-roller';
+import { useDiceRoller } from '@dice-roller/vue';
 
 const FENCE = ':::';
 
 const defaultOptions = {};
 
-const roll = (notation) => new DiceRoll(notation.trim());
+const roll = (notation) => {
+
+
+  const {output, roll} = useDiceRoller({
+    notation: () => notation.trim(),
+  });
+
+  roll();
+
+  return output.value?.output ?? '';
+};
 
 const includePlugin = (md, options = {}) => {
   options = { ...defaultOptions, ...options };
 
-  const fenceRegex = new RegExp(`${FENCE}\\s*roll(\\s+.+(?!:::))?(\\s*${FENCE})`);
+  const fenceRegex = new RegExp(`${FENCE}\\s*roll\\b((?:(?!${FENCE})[\\s\\S])*)${FENCE}(?![ \\t]*(?:roll|roller)\\b)`);
 
   const renderRoll = (notation) => {
     const output = notation ? roll(notation) : '';
@@ -50,4 +60,3 @@ const includePlugin = (md, options = {}) => {
 };
 
 export default includePlugin;
-
