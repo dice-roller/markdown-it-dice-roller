@@ -10,6 +10,7 @@ globalThis.__VUE_PROD_HYDRATION_MISMATCH_DETAILS__ = false;
 const createFixture = (diceRollerComponent) => {
   document.body.innerHTML = `
     <textarea id="markdown-input"></textarea>
+    <textarea id="data-input">{}</textarea>
     <pre><code id="generated-html"></code></pre>
     <div id="preview"></div>
     <p id="error-message" role="alert" hidden></p>
@@ -17,6 +18,7 @@ const createFixture = (diceRollerComponent) => {
 
   return createPlayground({
     markdownInput: document.querySelector('#markdown-input'),
+    dataInput: document.querySelector('#data-input'),
     generatedHtml: document.querySelector('#generated-html'),
     preview: document.querySelector('#preview'),
     errorMessage: document.querySelector('#error-message'),
@@ -122,6 +124,22 @@ describe('Markdown playground preview', () => {
     await nextTick();
 
     expect(preview.querySelector('output').textContent).toContain('1d1: [1] = 1');
+  });
+
+  test('passes configured data through the generated binding to an interactive roll', async () => {
+    playground = createFixture();
+    const markdownInput = document.querySelector('#markdown-input');
+    const dataInput = document.querySelector('#data-input');
+    const preview = document.querySelector('#preview');
+    const notation = '1d1 + $character.attackBonus + $character.isPoisoned';
+    markdownInput.value = `::: roller ${notation} :::`;
+    dataInput.value = '{"character":{"attackBonus":3,"isPoisoned":false}}';
+
+    expect(playground.render()).toContain(':data="{&quot;character&quot;:');
+    preview.querySelector('button').click();
+    await nextTick();
+
+    expect(preview.querySelector('output').textContent.trim()).toMatch(/ = 4$/);
   });
 
   test('shows Vue component errors in the playground error message', () => {

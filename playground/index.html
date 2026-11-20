@@ -6,6 +6,7 @@
     <title>Markdown Dice Roller Playground</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
+
   <body>
     <main class="playground">
       <header>
@@ -13,8 +14,10 @@
         <p>Edit the Markdown, then render it to see static rolls and interactive rollers.</p>
       </header>
 
-      <label for="markdown-input">Markdown</label>
-      <textarea id="markdown-input" spellcheck="false">A static roll:
+        <fieldset class="form">
+            <div>
+                <label for="markdown-input">Markdown</label>
+                <textarea id="markdown-input" spellcheck="false">A static roll:
 
 ::: roll 1d6 :::
 
@@ -23,14 +26,29 @@ An interactive roller:
 ::: roller 1d20 :::
 
 Both plugins can be used in the same document.</textarea>
-      <button id="render-button" type="button">Render preview</button>
-      <p id="error-message" role="alert" hidden></p>
+            </div>
+
+            <div>
+                <label for="data-input">Data</label>
+                <textarea id="data-input" spellcheck="false">{
+    "bonus": 3,
+    "character": {
+        "attackBonus": 2,
+        "isPoisoned": false
+    }
+}</textarea>
+            </div>
+        </fieldset>
+
+        <button id="render-button" type="button">Render preview</button>
+        <p id="error-message" role="alert" hidden></p>
 
       <div class="outputs">
         <section aria-labelledby="html-heading">
           <h2 id="html-heading">Generated HTML</h2>
           <pre><code id="generated-html"></code></pre>
         </section>
+
         <section aria-labelledby="preview-heading">
           <h2 id="preview-heading">Visual preview</h2>
           <div id="preview" class="preview"></div>

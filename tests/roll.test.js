@@ -20,7 +20,7 @@ describe('Roll plugin', () => {
     mockRoll.mockClear();
     mockUseDiceRoller.mockReset();
     mockUseDiceRoller.mockReturnValue({
-      output: { value: { output: formattedResult } },
+      output: { value: { toString: () => formattedResult } },
       roll: mockRoll,
     });
   });

@@ -3,19 +3,19 @@ const FENCE = ':::';
 const defaultOptions = {};
 
 const includePlugin = (md, options = {}) => {
-  options = { ...defaultOptions, ...options };
+  const rollOptions = { ...defaultOptions, ...options };
+  const { data } = rollOptions;
+  const dataAttribute = data === undefined
+    ? ''
+    : ` :data="${md.utils.escapeHtml(JSON.stringify(data))}"`;
 
-  const fenceRegex = new RegExp(`${FENCE}\\s*roller\\b((?:(?!${FENCE})[\\s\\S])*)${FENCE}(?![ \\t]*(?:roll|roller)\\b)`);
+  const fenceRegex = new RegExp(`${FENCE}\\s*roller\\b((?:(?!${FENCE})[\\s\\S])*)${FENCE}(?![ \\t]*(?:roll|roller)\\b)`, 'g');
 
   const includeRoller = (state) => {
-    let cap;
-    while ((cap = fenceRegex.exec(state.src))) {
-      const notation = (cap[1] || '').trim();
-
-      state.src = `${state.src.slice(0, cap.index)}
-<DiceRoller notation="${notation}" />
-${state.src.slice(cap.index + cap[0].length, state.src.length)}`;
-    }
+    state.src = state.src.replace(fenceRegex, (_fence, notation) => {
+      const escapedNotation = md.utils.escapeHtml(notation.trim());
+      return `\n<DiceRoller notation="${escapedNotation}"${dataAttribute} />\n`;
+    });
   };
 
   md.core.ruler.before('normalize', 'roller', includeRoller);

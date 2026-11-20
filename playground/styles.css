@@ -37,6 +37,17 @@ button {
   padding: 0.55rem 0.9rem;
 }
 
+.form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.form > div {
+  flex: 1;
+}
+
 #error-message {
   color: #b42318;
   font-weight: 600;

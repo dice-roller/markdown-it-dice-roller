@@ -4,10 +4,9 @@ const FENCE = ':::';
 
 const defaultOptions = {};
 
-const roll = (notation) => {
-
-
+const roll = (notation, options) => {
   const {output, roll} = useDiceRoller({
+    ...options,
     notation: () => notation.trim(),
   });
 
@@ -17,18 +16,18 @@ const roll = (notation) => {
 };
 
 const includePlugin = (md, options = {}) => {
-  options = { ...defaultOptions, ...options };
+  const rollOptions = { ...defaultOptions, ...options };
 
   const fenceRegex = new RegExp(`${FENCE}\\s*roll\\b((?:(?!${FENCE})[\\s\\S])*)${FENCE}(?![ \\t]*(?:roll|roller)\\b)`);
 
   const renderRoll = (notation) => {
-    const output = notation ? roll(notation) : '';
+    const output = notation ? roll(notation, rollOptions) : '';
 
-    if (typeof options.renderRoll === 'function') {
-      return options.renderRoll(output);
+    if (typeof rollOptions.renderRoll === 'function') {
+      return rollOptions.renderRoll(output);
     }
 
-    switch (options.as) {
+    switch (rollOptions.as) {
       case 'blockquote':
       case 'block-quote':
       case '>':
